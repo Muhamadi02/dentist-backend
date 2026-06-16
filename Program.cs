@@ -9,9 +9,14 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
-{
+{ 
     app.UseSwagger();
-    app.UseSwaggerUI();
+
+    app.UseSwaggerUI(c =>
+                {
+                    c.RoutePrefix = "api/v1";
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Dentist API V1");
+                });
 }
 
 app.UseHttpsRedirection();
