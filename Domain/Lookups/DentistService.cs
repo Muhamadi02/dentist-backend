@@ -1,6 +1,7 @@
 using dentist.api.Domain.Common;
+using dentist.api.Domain.Entities;
 
-namespace dentist.api.Domain.Entities;
+namespace dentist.api.Domain.Lookups;
 
 public class DentistService : BaseEntity
 {

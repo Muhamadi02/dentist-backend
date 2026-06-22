@@ -1,3 +1,4 @@
+using dentist.api.Domain.Lookups;
 using dentist.api.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
