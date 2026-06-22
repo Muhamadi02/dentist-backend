@@ -10,5 +10,6 @@ public class Patient : BaseEntity
     public string Email { get; set; } = string.Empty;
     public DateTime DateOfBirth { get; set; }
     public string? Notes { get; set; }
+    public ICollection<Treatment> Treatments { get; set; } = new List<Treatment>();
     
 }

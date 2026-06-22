@@ -11,4 +11,5 @@ public class User : BaseEntity
     public string PasswordHash { get; set; } = string.Empty;
     public string Role { get; set; } = string.Empty;
     public bool IsActive { get; set; } = true;
+    public ICollection<Treatment> Treatments { get; set; } = new List<Treatment>();
 }

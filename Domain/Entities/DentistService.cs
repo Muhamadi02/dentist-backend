@@ -8,5 +8,6 @@ public class DentistService : BaseEntity
     public string? Description { get; set; }
     public decimal DefaultPrice { get; set; }
     public bool IsActive { get; set; } = true;
+    public ICollection<Treatment> Treatments { get; set; } = new List<Treatment>();
     
 }
