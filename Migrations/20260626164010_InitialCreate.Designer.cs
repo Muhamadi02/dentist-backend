@@ -12,7 +12,7 @@ using dentist.api.Data;
 namespace dentist.api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260622115239_InitialCreate")]
+    [Migration("20260626164010_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,54 +24,6 @@ namespace dentist.api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("dentist.api.Domain.Entities.DentistService", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("integer")
-                        .HasColumnName("created_by");
-
-                    b.Property<decimal>("DefaultPrice")
-                        .HasColumnType("numeric")
-                        .HasColumnName("default_price");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_active");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("modified_at");
-
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("integer")
-                        .HasColumnName("modified_by");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id")
-                        .HasName("pk_dentist_services");
-
-                    b.ToTable("dentist_services", (string)null);
-                });
 
             modelBuilder.Entity("dentist.api.Domain.Entities.Patient", b =>
                 {
@@ -90,8 +42,8 @@ namespace dentist.api.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("created_by");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("timestamp with time zone")
+                    b.Property<DateOnly>("DateOfBirth")
+                        .HasColumnType("date")
                         .HasColumnName("date_of_birth");
 
                     b.Property<string>("Email")
@@ -269,9 +221,57 @@ namespace dentist.api.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("dentist.api.Domain.Lookups.DentistService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("integer")
+                        .HasColumnName("created_by");
+
+                    b.Property<decimal>("DefaultPrice")
+                        .HasColumnType("numeric")
+                        .HasColumnName("default_price");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_active");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("modified_at");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("integer")
+                        .HasColumnName("modified_by");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_dentist_services");
+
+                    b.ToTable("dentist_services", (string)null);
+                });
+
             modelBuilder.Entity("dentist.api.Domain.Entities.Treatment", b =>
                 {
-                    b.HasOne("dentist.api.Domain.Entities.DentistService", "DentistService")
+                    b.HasOne("dentist.api.Domain.Lookups.DentistService", "DentistService")
                         .WithMany("Treatments")
                         .HasForeignKey("DentistServiceId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -299,17 +299,17 @@ namespace dentist.api.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("dentist.api.Domain.Entities.DentistService", b =>
-                {
-                    b.Navigation("Treatments");
-                });
-
             modelBuilder.Entity("dentist.api.Domain.Entities.Patient", b =>
                 {
                     b.Navigation("Treatments");
                 });
 
             modelBuilder.Entity("dentist.api.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Treatments");
+                });
+
+            modelBuilder.Entity("dentist.api.Domain.Lookups.DentistService", b =>
                 {
                     b.Navigation("Treatments");
                 });
