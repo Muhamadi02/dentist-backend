@@ -1,7 +1,6 @@
-using dentist.api.Domain.Common;
-namespace dentist.api.Domain.Entities;
+namespace dentist.api.Application.DTOs;
 
-public class User : BaseEntity
+public class UserCreateDto
 {
     public string FirstName { get; set; } = string.Empty;
 
@@ -14,8 +13,4 @@ public class User : BaseEntity
     public string Password { get; set; } = string.Empty;
 
     public string Role { get; set; } = string.Empty;
-
-    public bool IsActive { get; set; } = true;
-
-    public ICollection<Treatment> Treatments { get; set; } = new List<Treatment>();
 }

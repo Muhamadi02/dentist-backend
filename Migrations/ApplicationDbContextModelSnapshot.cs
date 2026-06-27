@@ -197,10 +197,10 @@ namespace dentist.api.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("modified_by");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("password_hash");
+                        .HasColumnName("password");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()

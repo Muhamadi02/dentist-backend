@@ -12,7 +12,7 @@ using dentist.api.Data;
 namespace dentist.api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260626164010_InitialCreate")]
+    [Migration("20260627142230_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -200,10 +200,10 @@ namespace dentist.api.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("modified_by");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("password_hash");
+                        .HasColumnName("password");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
